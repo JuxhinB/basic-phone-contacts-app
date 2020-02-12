@@ -21,8 +21,9 @@
   },
   "scripts": {
     "build:style": "postcss src/theme/style/style-raw.scss -o src/theme/style/style.scss",
+    "watch:style": "postcss src/theme/style/style-raw.scss -o src/theme/style/style.scss -w",
     "start-scss-map": "react-app-rewired start node-sass --source-map true --include-path ./src --include-path ./node_modules ./src/scss -o",
-    "start": "npm run build:style && react-app-rewired start",
+    "start": "react-app-rewired start",
     "build": "npm run build:style && react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",

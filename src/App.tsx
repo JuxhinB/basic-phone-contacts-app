@@ -1,12 +1,12 @@
 import React from "react";
-import RootContainer from "./container/RootContainer";
+import RootContainer from "./module/RootContainer";
 import { hot } from 'react-hot-loader/root'
 
 interface AppProps {}
 
 function App() {
   return (
-    <div className="">
+    <div className="phone-contact">
       <RootContainer />
     </div>
   );
