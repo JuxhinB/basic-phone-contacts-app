@@ -1,0 +1,14 @@
+[
+  {
+    "id": "1",
+    "firstName": "John",
+    "lastName": "Doe",
+    "rel": "Friend",
+    "numbers": [
+      {
+        "type": "Home",
+        "number": "+355 67 2340 874"
+      }
+    ]
+  }
+]
