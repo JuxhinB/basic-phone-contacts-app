@@ -1,9 +1,10 @@
 import React from "react";
-import { ContactProps } from "../../../../basic-phone-contacts-api/Types";
+import { ContactProps } from "../../../Types";
 
 function Contact(
   {
     id,
+    fl,
     firstName,
     lastName,
     rel,

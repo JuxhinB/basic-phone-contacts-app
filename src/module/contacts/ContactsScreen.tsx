@@ -1,24 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Contact, SearchContacts } from "./component";
-import { ContactProps } from "../../../basic-phone-contacts-api/Types";
-
-const contacts = require("../../data/contacts-list.json");
+import { ContactProps } from "../../Types";
+import { MainContext } from "../../provider";
 
 interface RegisterScreenProps {
 }
 
-function ContactsScreen() {
+function ContactsScreen(): JSX.Element {
+
+  const { contacts } = useContext(MainContext);
+
+  function createContact() {
+
+  }
+
   return (
     <div className={"flex flex-1 justify-center items-center bg-blue-200"}>
-      <div className="rounded-lg overflow-hidden shadow-lg bg-white min-h-64 w-1/2">
+      <div
+        style={{
+          maxWidth: 500,
+        }}
+        className="rounded-lg overflow-hidden shadow-lg bg-white min-h-64 w-full"
+      >
         <p className="px-2 text-gray-600 mb-2 text-2xl font-thin px-4 pt-3">Contacts</p>
         <SearchContacts/>
         <div className="py-5 px-3">
           {
-            contacts.map((contact: ContactProps, index: number) => {
+            contacts && contacts.map((contact: ContactProps, index: number) => {
               return (
                 <Contact
+                  key={`${index}`}
                   id={contact.id}
+                  fl={contact.fl}
                   firstName={contact.firstName}
                   lastName={contact.lastName}
                   rel={contact.rel}

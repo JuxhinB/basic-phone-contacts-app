@@ -1,14 +1,14 @@
 import React from "react";
 import { SwitchNavigation } from "../navigation";
-import { UserProvider } from "../provider";
+import { MainProvider } from "../provider";
 
 interface RootContainerProps {}
 
 function RootContainer() {
   return (
-    <UserProvider>
+    <MainProvider>
       <SwitchNavigation />
-    </UserProvider>
+    </MainProvider>
   );
 }
 
