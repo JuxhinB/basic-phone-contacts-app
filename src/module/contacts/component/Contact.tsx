@@ -1,5 +1,5 @@
 import React from "react";
-import { ContactProps } from "../../../types/AppTypes";
+import { ContactProps } from "../../../../basic-phone-contacts-api/Types";
 
 function Contact(
   {

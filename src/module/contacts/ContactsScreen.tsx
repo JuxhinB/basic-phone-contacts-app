@@ -1,6 +1,6 @@
 import React from "react";
 import { Contact, SearchContacts } from "./component";
-import { ContactProps } from "../../types/AppTypes";
+import { ContactProps } from "../../../basic-phone-contacts-api/Types";
 
 const contacts = require("../../data/contacts-list.json");
 
