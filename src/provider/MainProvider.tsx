@@ -7,11 +7,13 @@ interface MainProviderProps {
 }
 
 interface MainContextTypes {
-  contacts: ContactProps[] | null;
+  contacts: ContactProps[] | any;
+  addContact: (contact: ContactProps) => void;
 }
 
 const USER_CONTEXT_INITIAL_VALUES = {
-  contacts: null,
+  contacts: [],
+  addContact: (contact: ContactProps) => undefined,
 };
 
 export const MainContext = createContext<MainContextTypes>({
@@ -20,7 +22,7 @@ export const MainContext = createContext<MainContextTypes>({
 
 function MainProvider({ children }: MainProviderProps) {
 
-  const [contacts, setContacts] = useState<ContactProps[] | null>(null);
+  const [contacts, setContacts] = useState<ContactProps[] | any>([]);
 
   useEffect(() => {
     let tempContact = ContactsAPI.getContacts("contacts");
@@ -28,10 +30,27 @@ function MainProvider({ children }: MainProviderProps) {
     if (tempContact) {
       setContacts(JSON.parse(tempContact));
     }
-  });
+  }, []);
+
+  function addContact(contact: ContactProps) {
+    try {
+      let tempVal = JSON.stringify(contacts);
+      if (contacts && contacts.length) {
+        setContacts([...contacts, contact]);
+        tempVal = JSON.stringify([...contacts, contact]);
+      } else {
+        setContacts([contact]);
+        tempVal = JSON.stringify([contact]);
+      }
+      ContactsAPI.addContact("contacts", tempVal);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   const providerValue = {
     contacts,
+    addContact,
   };
 
   return (

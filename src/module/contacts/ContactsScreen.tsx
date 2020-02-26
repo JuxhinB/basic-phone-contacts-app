@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Contact, SearchContacts } from "./component";
 import { ContactProps } from "../../Types";
 import { MainContext } from "../../provider";
@@ -7,6 +8,7 @@ interface RegisterScreenProps {
 }
 
 function ContactsScreen(): JSX.Element {
+  let history = useHistory();
 
   const { contacts } = useContext(MainContext);
 
@@ -26,7 +28,7 @@ function ContactsScreen(): JSX.Element {
         <SearchContacts/>
         <div className="py-5 px-3">
           {
-            contacts && contacts.map((contact: ContactProps, index: number) => {
+            contacts && contacts.length && contacts.map((contact: ContactProps, index: number) => {
               return (
                 <Contact
                   key={`${index}`}
@@ -43,7 +45,12 @@ function ContactsScreen(): JSX.Element {
 
         </div>
         <div className="flex justify-end bg-gray-100 flex px-2 py-3">
-          <button className="bg-blue-500 py-2 px-4 rounded text-white">Create</button>
+          <button
+            onClick={() => history.push("/new-contact")}
+            className="bg-blue-500 py-2 px-4 rounded text-white"
+          >
+            Add Contact
+          </button>
         </div>
       </div>
     </div>
