@@ -10,12 +10,14 @@ interface MainContextTypes {
   contacts: ContactProps[] | any;
   addContact: (contact: ContactProps) => void;
   removeContactDelete: (id: number) => void;
+  editContact: (id: number, contact: ContactProps) => void;
 }
 
 const USER_CONTEXT_INITIAL_VALUES = {
   contacts: [],
   addContact: (contact: ContactProps) => undefined,
   removeContactDelete: (id: number) => undefined,
+  editContact: (id: number, contact: ContactProps) => undefined,
 };
 
 export const MainContext = createContext<MainContextTypes>({
@@ -61,6 +63,21 @@ function MainProvider({ children }: MainProviderProps) {
     }
   }
 
+  function editContact(id: number, info: ContactProps) {
+    try {
+      contacts.map((contact: ContactProps, index: number) => {
+        if (contact.id === id) {
+          setContacts(contacts.splice(index, 1, info));
+          ContactsAPI.updateContacts("contacts", JSON.stringify(contacts));
+          updateContacts();
+          return;
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   function updateContacts() {
     let tempContact = ContactsAPI.getContacts("contacts");
 
@@ -73,6 +90,7 @@ function MainProvider({ children }: MainProviderProps) {
     contacts,
     addContact,
     removeContactDelete,
+    editContact,
   };
 
   return (

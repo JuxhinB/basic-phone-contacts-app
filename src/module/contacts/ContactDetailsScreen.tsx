@@ -4,7 +4,7 @@ import { ContactProps } from "../../Types";
 import { MainContext } from "../../provider";
 
 function ContactDetailsScreen() {
-  const { removeContactDelete } = useContext(MainContext);
+  const { removeContactDelete, editContact } = useContext(MainContext);
   // state
   const [info, setInfo] = useState<ContactProps | null>(null);
 
@@ -17,6 +17,13 @@ function ContactDetailsScreen() {
   function handleContactDelete() {
     if (info) {
       removeContactDelete(info.id);
+      history.goBack();
+    }
+  }
+
+  function handleContactEdit() {
+    if (info) {
+      editContact(info.id, { ...info });
       history.goBack();
     }
   }
@@ -49,7 +56,7 @@ function ContactDetailsScreen() {
                 }}
                 type="text"
                 className="px-3 py-2 bg-gray-200 flex-1 rounded relative mb-3 ml-1"
-                value={info.firstName}
+                value={info?.lastName}
                 placeholder="Last Name"
               />
             </div>
@@ -98,7 +105,7 @@ function ContactDetailsScreen() {
             Delete
           </button>
           <button
-            onClick={() => history.push("/new-contact")}
+            onClick={handleContactEdit}
             className="bg-blue-500 py-2 px-4 rounded text-white"
           >
             Save
