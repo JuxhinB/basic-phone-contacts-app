@@ -1,4 +1,5 @@
 export interface ContactProps {
+  onClick?: any;
   id: number;
   fl: string;
   firstName: string;

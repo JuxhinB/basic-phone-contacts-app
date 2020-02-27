@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { ContactsScreen, NewContactScreen } from "../module/contacts";
+import { ContactsScreen, NewContactScreen, ContactDetailsScreen } from "../module/contacts";
 
 interface GuestNavigationProps {
 }
@@ -11,6 +11,7 @@ function GuestNavigation() {
       <Route exact path="/" component={ContactsScreen}/>
       <Route exact path="/home" component={ContactsScreen}/>
       <Route exact path="/new-contact" component={NewContactScreen}/>
+      <Route exact path="/details" component={ContactDetailsScreen}/>
     </Switch>
   );
 }

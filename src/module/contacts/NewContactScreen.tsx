@@ -71,7 +71,7 @@ function NewContactScreen() {
                 <option value={"family"}>Family</option>
                 <option value={"work"}>Work</option>
                 <option value={"gym"}>Gym</option>
-                <option value={"gym"}>Schrool</option>
+                <option value={"gym"}>School</option>
               </select>
             </div>
             <div className={"flex w-1/2 mb-3 pl-1"}>

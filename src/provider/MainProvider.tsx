@@ -9,11 +9,13 @@ interface MainProviderProps {
 interface MainContextTypes {
   contacts: ContactProps[] | any;
   addContact: (contact: ContactProps) => void;
+  removeContactDelete: (id: number) => void;
 }
 
 const USER_CONTEXT_INITIAL_VALUES = {
   contacts: [],
   addContact: (contact: ContactProps) => undefined,
+  removeContactDelete: (id: number) => undefined,
 };
 
 export const MainContext = createContext<MainContextTypes>({
@@ -25,11 +27,7 @@ function MainProvider({ children }: MainProviderProps) {
   const [contacts, setContacts] = useState<ContactProps[] | any>([]);
 
   useEffect(() => {
-    let tempContact = ContactsAPI.getContacts("contacts");
-
-    if (tempContact) {
-      setContacts(JSON.parse(tempContact));
-    }
+    updateContacts();
   }, []);
 
   function addContact(contact: ContactProps) {
@@ -42,15 +40,39 @@ function MainProvider({ children }: MainProviderProps) {
         setContacts([contact]);
         tempVal = JSON.stringify([contact]);
       }
-      ContactsAPI.addContact("contacts", tempVal);
+      ContactsAPI.updateContacts("contacts", tempVal);
     } catch (e) {
       console.log(e);
+    }
+  }
+
+  function removeContactDelete(id: number) {
+    try {
+      contacts.map((contact: ContactProps, index: number) => {
+        if (contact.id === id) {
+          setContacts(contacts.splice(index, 1));
+          ContactsAPI.updateContacts("contacts", JSON.stringify(contacts));
+          updateContacts();
+          return;
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  function updateContacts() {
+    let tempContact = ContactsAPI.getContacts("contacts");
+
+    if (tempContact) {
+      setContacts(JSON.parse(tempContact));
     }
   }
 
   const providerValue = {
     contacts,
     addContact,
+    removeContactDelete,
   };
 
   return (

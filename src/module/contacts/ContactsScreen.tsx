@@ -31,7 +31,10 @@ function ContactsScreen(): JSX.Element {
             contacts && contacts.length && contacts.map((contact: ContactProps, index: number) => {
               return (
                 <Contact
-                  key={`${index}`}
+                  key={contact.id}
+                  onClick={() => {
+                    history.push("/details", contacts[index]);
+                  }}
                   id={contact.id}
                   fl={contact.fl}
                   firstName={contact.firstName}
