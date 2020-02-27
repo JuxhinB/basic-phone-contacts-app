@@ -4,17 +4,10 @@ import { Contact, SearchContacts } from "./component";
 import { ContactProps } from "../../Types";
 import { MainContext } from "../../provider";
 
-interface RegisterScreenProps {
-}
-
 function ContactsScreen(): JSX.Element {
   let history = useHistory();
 
   const { contacts } = useContext(MainContext);
-
-  function createContact() {
-
-  }
 
   return (
     <div className={"flex flex-1 justify-center items-center bg-blue-200"}>

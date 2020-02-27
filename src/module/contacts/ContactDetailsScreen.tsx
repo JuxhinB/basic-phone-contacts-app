@@ -28,6 +28,35 @@ function ContactDetailsScreen() {
     }
   }
 
+  function handleNumberChange(action: "type" | "number", value: string, index: number) {
+    if (info) {
+      let tempNum = JSON.parse(JSON.stringify(info.numbers));
+      if (action === "type") {
+        tempNum.splice(
+          index,
+          1,
+          {
+            type: value,
+            number: info.numbers[index].number,
+          },
+        );
+      } else if (action === "number") {
+        tempNum.splice(
+          index,
+          1,
+          {
+            type: info.numbers[index].type,
+            number: value,
+          },
+        );
+      }
+      setInfo({
+        ...info,
+        numbers: tempNum,
+      });
+    }
+  }
+
   return (
     <div className={"flex flex-1 justify-center items-center bg-blue-200"}>
       <div
@@ -75,41 +104,59 @@ function ContactDetailsScreen() {
                   <option value={"gym"}>School</option>
                 </select>
               </div>
-              {/*<div className={"flex w-1/2 mb-3 pl-1"}>*/}
-              {/*  <select*/}
-              {/*    onChange={(e) => {*/}
-              {/*      setNrType(e.target.value);*/}
-              {/*    }}*/}
-              {/*    className={"px-3 py-2 bg-gray-200 flex-1 rounded mr-1"}*/}
-              {/*  >*/}
-              {/*    <option value={"mobile"}>Mob</option>*/}
-              {/*    <option value={"home"}>Home</option>*/}
-              {/*  </select>*/}
-              {/*  <input*/}
-              {/*    onChange={(e) => {*/}
-              {/*      setPhoneNumber(e.target.value);*/}
-              {/*    }}*/}
-              {/*    type="number"*/}
-              {/*    className="px-3 py-2 bg-gray-200 w-10/12 rounded"*/}
-              {/*    placeholder="Phone Number"*/}
-              {/*  />*/}
-              {/*</div>*/}
+              {
+                info && info.numbers && info.numbers.map((number, index) => {
+                  return (
+                    <div key={`${index}`} className={"flex w-1/2 mb-3 pl-1"}>
+                      <select
+                        onChange={(e) => {
+                          handleNumberChange("type", e.target.value, index);
+                        }}
+                        className={"px-3 py-2 bg-gray-200 flex-1 rounded mr-1"}
+                        value={number.type}
+                      >
+                        <option value={"mobile"}>Mob</option>
+                        <option value={"home"}>Home</option>
+                      </select>
+                      <input
+                        onChange={(e) => {
+                          handleNumberChange("number", e.target.value, index);
+                        }}
+                        type="number"
+                        className="px-3 py-2 bg-gray-200 w-10/12 rounded"
+                        placeholder="Phone Number"
+                        value={number.number}
+                      />
+                    </div>
+                  );
+                })
+              }
             </div>
           </div>}
 
-        <div className="flex justify-end bg-gray-100 flex px-2 py-3">
+        <div className="flex justify-between bg-gray-100 flex px-2 py-3">
           <button
-            onClick={handleContactDelete}
-            className="bg-red-500 py-2 px-4 rounded text-white mr-3"
+            onClick={() => {
+              history.goBack();
+            }}
+            className="bg-gray-300 py-2 px-4 rounded text-gray-700 mr-10"
           >
-            Delete
+            Back
           </button>
-          <button
-            onClick={handleContactEdit}
-            className="bg-blue-500 py-2 px-4 rounded text-white"
-          >
-            Save
-          </button>
+          <div>
+            <button
+              onClick={handleContactDelete}
+              className="bg-red-500 py-2 px-4 rounded text-white mr-3"
+            >
+              Delete
+            </button>
+            <button
+              onClick={handleContactEdit}
+              className="bg-blue-500 py-2 px-4 rounded text-white"
+            >
+              Save
+            </button>
+          </div>
         </div>
       </div>
     </div>
