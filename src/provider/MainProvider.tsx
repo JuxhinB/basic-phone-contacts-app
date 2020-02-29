@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, Dispatch, useEffect, useState } from "react";
 import { ContactProps } from "../Types";
 import ContactsAPI from "../basic-phone-contacts-api/ContactsAPI";
 
@@ -11,6 +11,8 @@ interface MainContextTypes {
   addContact: (contact: ContactProps) => void;
   removeContactDelete: (id: number) => void;
   editContact: (id: number, contact: ContactProps) => void;
+  searchStr: string | null,
+  setSearchStr: Dispatch<string>;
 }
 
 const USER_CONTEXT_INITIAL_VALUES = {
@@ -18,6 +20,8 @@ const USER_CONTEXT_INITIAL_VALUES = {
   addContact: (contact: ContactProps) => undefined,
   removeContactDelete: (id: number) => undefined,
   editContact: (id: number, contact: ContactProps) => undefined,
+  searchStr: null,
+  setSearchStr: (str: String) => undefined,
 };
 
 export const MainContext = createContext<MainContextTypes>({
@@ -27,10 +31,23 @@ export const MainContext = createContext<MainContextTypes>({
 function MainProvider({ children }: MainProviderProps) {
 
   const [contacts, setContacts] = useState<ContactProps[] | any>([]);
+  const [searchStr, setSearchStr] = useState<string | null>(null);
 
+  /**
+   * @description Hook used to initialize and filter contacts based on search
+   */
   useEffect(() => {
-    updateContacts();
-  }, []);
+    if (searchStr) {
+      const result = contacts.filter((contact: ContactProps) => {
+        if (`${contact.firstName}${contact.lastName}`.includes(searchStr)) {
+          return contact;
+        }
+      });
+      setContacts(result);
+    } else {
+      updateContacts();
+    }
+  }, [searchStr]);
 
   function addContact(contact: ContactProps) {
     try {
@@ -91,6 +108,7 @@ function MainProvider({ children }: MainProviderProps) {
     addContact,
     removeContactDelete,
     editContact,
+    searchStr, setSearchStr,
   };
 
   return (

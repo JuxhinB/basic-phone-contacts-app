@@ -21,7 +21,7 @@ function ContactsScreen(): JSX.Element {
         <SearchContacts/>
         <div className="py-5 px-3">
           {
-            contacts && contacts.length && contacts.map((contact: ContactProps, index: number) => {
+            contacts && contacts.map((contact: ContactProps, index: number) => {
               return (
                 <Contact
                   key={contact.id}
