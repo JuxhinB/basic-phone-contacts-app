@@ -12,6 +12,7 @@ function ContactDetailsScreen() {
 
   useEffect(() => {
     setInfo(history.location.state as ContactProps);
+    // eslint-disable-next-line
   }, []);
 
   function handleContactDelete() {

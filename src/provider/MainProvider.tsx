@@ -50,14 +50,14 @@ function MainProvider({ children }: MainProviderProps) {
 
   function removeContactDelete(id: number) {
     try {
-      contacts.map((contact: ContactProps, index: number) => {
-        if (contact.id === id) {
-          setContacts(contacts.splice(index, 1));
+      for (let i = 0; i < contacts.length; i++) {
+        if (contacts[i].id === id) {
+          setContacts(contacts.splice(i, 1));
           ContactsAPI.updateContacts("contacts", JSON.stringify(contacts));
           updateContacts();
           return;
         }
-      });
+      }
     } catch (e) {
       console.log(e);
     }
@@ -65,14 +65,14 @@ function MainProvider({ children }: MainProviderProps) {
 
   function editContact(id: number, info: ContactProps) {
     try {
-      contacts.map((contact: ContactProps, index: number) => {
-        if (contact.id === id) {
-          setContacts(contacts.splice(index, 1, info));
+      for (let i = 0; i < contacts.length; i++) {
+        if (contacts[i].id === id) {
+          setContacts(contacts.splice(i, 1, info));
           ContactsAPI.updateContacts("contacts", JSON.stringify(contacts));
           updateContacts();
           return;
         }
-      });
+      }
     } catch (e) {
       console.log(e);
     }
