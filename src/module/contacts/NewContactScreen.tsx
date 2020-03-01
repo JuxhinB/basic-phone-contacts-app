@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
  * fields about the new contact.
  * @return {JSX.Element} JSX.Element
  */
-function NewContactScreen():JSX.Element {
+function NewContactScreen(): JSX.Element {
   // context
   /**
    * @method useContext
@@ -32,7 +32,7 @@ function NewContactScreen():JSX.Element {
    * @description Method used to format values from inputs and than add the new
    * contact using hook from context.
    */
-  function handleCreateContact():void {
+  function handleCreateContact(): void {
     if (firstName && lastName && rel && phoneNumber && nrType) {
       addContact({
         id: moment().unix(),
@@ -55,28 +55,32 @@ function NewContactScreen():JSX.Element {
         style={{
           maxWidth: 500,
         }}
-        className="rounded-lg overflow-hidden shadow-lg bg-white min-h-64 w-full"
+        className="rounded-lg overflow-hidden shadow-lg bg-white min-h-64 w-full mx-4"
       >
         <p className="px-2 text-gray-600 mb-2 text-2xl font-thin px-4 pt-3">New Contact</p>
         <div className="py-5 px-3">
 
           <div className={"flex"}>
-            <input
-              onChange={(e) => {
-                setFirstName(e.target.value);
-              }}
-              type="text"
-              className="px-3 py-2 bg-gray-200 flex-1 rounded relative mb-3 mr-1"
-              placeholder="First Name"
-            />
-            <input
-              onChange={(e) => {
-                setLastName(e.target.value);
-              }}
-              type="text"
-              className="px-3 py-2 bg-gray-200 flex-1 rounded relative mb-3 ml-1"
-              placeholder="Last Name"
-            />
+            <div className={"flex w-1/2"}>
+              <input
+                onChange={(e) => {
+                  setFirstName(e.target.value);
+                }}
+                type="text"
+                className="px-3 py-2 bg-gray-200 flex-1 rounded relative mb-3 mr-1 w-full"
+                placeholder="First Name"
+              />
+            </div>
+            <div className={"flex w-1/2"}>
+              <input
+                onChange={(e) => {
+                  setLastName(e.target.value);
+                }}
+                type="text"
+                className="px-3 py-2 bg-gray-200 flex-1 rounded relative mb-3 ml-1 w-full"
+                placeholder="Last Name"
+              />
+            </div>
           </div>
           <div className={"flex"}>
             <div className={"flex w-1/2 mb-3"}>

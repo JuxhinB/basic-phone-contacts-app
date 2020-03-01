@@ -11,7 +11,7 @@ import { ContactProps } from "../../../Types";
  * @param rel {String} Contacts's relation to user
  * @param numbers {NumberProps[]}
  * @return {JSX.Element} JSX.Element
- * @description  React Component. Component responsible.
+ * @description  React Component. Component responsible .
  * @return {JSX.Element} JSX.Element
  */
 function Contact(

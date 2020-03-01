@@ -39,7 +39,7 @@ function ContactDetailsScreen() {
    * @return null
    * @description Method used to handle user's delete actions for a contact.
    */
-  function handleContactDelete():void {
+  function handleContactDelete(): void {
     if (info) {
       removeContact(info.id);
       history.goBack();
@@ -52,7 +52,7 @@ function ContactDetailsScreen() {
    * @return null
    * @description Method used to handle user's edit actions for a contact.
    */
-  function handleContactEdit():void {
+  function handleContactEdit(): void {
     if (info) {
       editContact(info.id, { ...info });
       history.goBack();
@@ -70,7 +70,7 @@ function ContactDetailsScreen() {
    * @return null
    * @description Method used to handle user's number change actions for a contact.
    */
-  function handleNumberChange(action: "type" | "number", value: string, index: number):void {
+  function handleNumberChange(action: "type" | "number", value: string, index: number): void {
     if (info) {
       let tempNum = JSON.parse(JSON.stringify(info.numbers));
       if (action === "type") {
@@ -105,31 +105,37 @@ function ContactDetailsScreen() {
         style={{
           maxWidth: 500,
         }}
-        className="rounded-lg overflow-hidden shadow-lg bg-white min-h-64 w-full"
+        className="rounded-lg overflow-hidden shadow-lg bg-white min-h-64 w-full mx-4"
       >
         <p className="px-2 text-gray-600 mb-2 text-2xl font-thin px-4 pt-3">Details</p>
         {
           info && <div className="py-5 px-3">
 
             <div className={"flex"}>
-              <input
-                onChange={(e) => {
-                  setInfo({ ...info, firstName: e.target.value });
-                }}
-                type="text"
-                className="px-3 py-2 bg-gray-200 flex-1 rounded relative mb-3 mr-1"
-                value={info.firstName}
-                placeholder="First Name"
-              />
-              <input
-                onChange={(e) => {
-                  setInfo({ ...info, lastName: e.target.value });
-                }}
-                type="text"
-                className="px-3 py-2 bg-gray-200 flex-1 rounded relative mb-3 ml-1"
-                value={info?.lastName}
-                placeholder="Last Name"
-              />
+
+              <div className={"flex w-1/2"}>
+                <input
+                  onChange={(e) => {
+                    setInfo({ ...info, firstName: e.target.value });
+                  }}
+                  type="text"
+                  className="w-full px-3 py-2 bg-gray-200 flex-1 rounded relative mb-3 mr-1"
+                  value={info.firstName}
+                  placeholder="First Name"
+                />
+              </div>
+
+              <div className={"flex w-1/2"}>
+                <input
+                  onChange={(e) => {
+                    setInfo({ ...info, lastName: e.target.value });
+                  }}
+                  type="text"
+                  className="w-full px-3 py-2 bg-gray-200 flex-1 rounded relative mb-3 ml-1"
+                  value={info?.lastName}
+                  placeholder="Last Name"
+                />
+              </div>
             </div>
             <div className={"flex"}>
               <div className={"flex w-1/2 mb-3"}>

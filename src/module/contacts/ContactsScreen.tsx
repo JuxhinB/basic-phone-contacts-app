@@ -21,7 +21,7 @@ function ContactsScreen(): JSX.Element {
         style={{
           maxWidth: 500,
         }}
-        className="rounded-lg overflow-hidden shadow-lg bg-white min-h-64 w-full"
+        className="rounded-lg overflow-hidden shadow-lg bg-white min-h-64 w-full mx-4"
       >
         <p className="px-2 text-gray-600 mb-2 text-2xl font-thin px-4 pt-3">Contacts</p>
         <SearchContacts/>
