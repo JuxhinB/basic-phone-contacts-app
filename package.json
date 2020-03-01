@@ -29,7 +29,7 @@
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
     "storybook": "start-storybook",
-    "format-all": "npx prettier --write 'src/**/*'",
+    "format": "npx prettier --write 'src/**/*'",
     "clean-npm": "rm -rf node_modules && rm -rf package-lock.json",
     "jsdoc": "npx jsdoc -c jsdocConfig.json"
   },

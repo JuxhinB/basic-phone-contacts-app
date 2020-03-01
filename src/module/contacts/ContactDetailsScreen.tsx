@@ -4,7 +4,7 @@ import { ContactProps } from "../../Types";
 import { MainContext } from "../../provider";
 
 function ContactDetailsScreen() {
-  const { removeContactDelete, editContact } = useContext(MainContext);
+  const { removeContact, editContact } = useContext(MainContext);
   // state
   const [info, setInfo] = useState<ContactProps | null>(null);
 
@@ -17,7 +17,7 @@ function ContactDetailsScreen() {
 
   function handleContactDelete() {
     if (info) {
-      removeContactDelete(info.id);
+      removeContact(info.id);
       history.goBack();
     }
   }

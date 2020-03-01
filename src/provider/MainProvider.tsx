@@ -9,7 +9,7 @@ interface MainProviderProps {
 interface MainContextTypes {
   contacts: ContactProps[] | any;
   addContact: (contact: ContactProps) => void;
-  removeContactDelete: (id: number) => void;
+  removeContact: (id: number) => void;
   editContact: (id: number, contact: ContactProps) => void;
   searchStr: string | null,
   setSearchStr: Dispatch<string>;
@@ -18,7 +18,7 @@ interface MainContextTypes {
 const USER_CONTEXT_INITIAL_VALUES = {
   contacts: [],
   addContact: (contact: ContactProps) => undefined,
-  removeContactDelete: (id: number) => undefined,
+  removeContact: (id: number) => undefined,
   editContact: (id: number, contact: ContactProps) => undefined,
   searchStr: null,
   setSearchStr: (str: String) => undefined,
@@ -28,12 +28,22 @@ export const MainContext = createContext<MainContextTypes>({
   ...USER_CONTEXT_INITIAL_VALUES,
 });
 
+/**
+ * @class MainProvider
+ * @param children JSX.Element
+ * @returns JSX.Element Application's main context.
+ * @description This is the main global context about the application.
+ * Responsible for holding and editing the contacts list.
+ */
 function MainProvider({ children }: MainProviderProps) {
 
   const [contacts, setContacts] = useState<ContactProps[] | any>([]);
   const [searchStr, setSearchStr] = useState<string | null>(null);
 
   /**
+   * @method useEffect
+   * @memberOf MainProvider
+   * @returns null
    * @description Hook used to initialize and filter contacts based on search
    */
   useEffect(() => {
@@ -52,7 +62,14 @@ function MainProvider({ children }: MainProviderProps) {
     }
   }, [searchStr]);
 
-  function addContact(contact: ContactProps) {
+  /**
+   * @method addContact
+   * @memberOf MainProvider
+   * @param contact
+   * @returns null
+   * @description This method is used to add a new contact to the contacts list.
+   */
+  function addContact(contact: ContactProps):void {
     try {
       let tempVal = JSON.stringify(contacts);
       if (contacts && contacts.length) {
@@ -68,7 +85,14 @@ function MainProvider({ children }: MainProviderProps) {
     }
   }
 
-  function removeContactDelete(id: number) {
+  /**
+   * @method removeContact
+   * @memberOf MainProvider
+   * @param id
+   * @returns null
+   * @description Method used to remove a contact by the list of contact selecting it by the id.
+   */
+  function removeContact(id: number):void {
     try {
       for (let i = 0; i < contacts.length; i++) {
         if (contacts[i].id === id) {
@@ -83,7 +107,15 @@ function MainProvider({ children }: MainProviderProps) {
     }
   }
 
-  function editContact(id: number, info: ContactProps) {
+  /**
+   * @method editContact
+   * @memberOf MainProvider
+   * @param id number Unique id of the contact
+   * @param info ContactProps Whole modified contact information.
+   * @returns null
+   * @description Method used to edit an existing contact selecting it by the id.
+   */
+  function editContact(id: number, info: ContactProps):void {
     try {
       for (let i = 0; i < contacts.length; i++) {
         if (contacts[i].id === id) {
@@ -98,7 +130,13 @@ function MainProvider({ children }: MainProviderProps) {
     }
   }
 
-  function updateContacts() {
+  /**
+   * @method updateContacts
+   * @memberOf MainProvider
+   * @returns null
+   * @description Method used to update the contact list from the storage.
+   */
+  function updateContacts():void {
     let tempContact = ContactsAPI.getContacts("contacts");
 
     if (tempContact) {
@@ -109,7 +147,7 @@ function MainProvider({ children }: MainProviderProps) {
   const providerValue = {
     contacts,
     addContact,
-    removeContactDelete,
+    removeContact,
     editContact,
     searchStr, setSearchStr,
   };
