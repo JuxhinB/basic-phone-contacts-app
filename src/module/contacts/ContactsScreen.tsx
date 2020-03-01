@@ -38,7 +38,6 @@ function ContactsScreen(): JSX.Element {
               );
             })
           }
-
         </div>
         <div className="flex justify-end bg-gray-100 flex px-2 py-3">
           <button

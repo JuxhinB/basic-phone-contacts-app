@@ -38,12 +38,15 @@ function MainProvider({ children }: MainProviderProps) {
    */
   useEffect(() => {
     if (searchStr) {
-      const result = contacts.filter((contact: ContactProps) => {
-        if (`${contact.firstName}${contact.lastName}`.includes(searchStr)) {
-          return contact;
-        }
-      });
-      setContacts(result);
+      let tempContact = ContactsAPI.getContacts("contacts");
+      if (tempContact) {
+        const result = JSON.parse(tempContact).filter((contact: ContactProps) => {
+          if (`${contact.firstName}${contact.lastName}`.includes(searchStr)) {
+            return contact;
+          }
+        });
+        setContacts(result);
+      }
     } else {
       updateContacts();
     }
