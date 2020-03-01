@@ -1,9 +1,11 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: module/contacts/component/Contact.tsx</title>
 
     <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -51,8 +53,8 @@
             <div class="column is-9-desktop">
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
-                        <p>Title</p>
-                        <h1>Home</h1>
+                        <p>Source</p>
+                        <h1>module/contacts/component/Contact.tsx</h1>
                     </header>
                     
                     
@@ -60,25 +62,71 @@
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import { ContactProps } from "../../../Types";
 
+/**
+ * @class Contact
+ * @param onClick {Event} Event delegated by parent to understand wether the element is clidked or not.
+ * @param id {Number} Contact's id
+ * @param fl {String} Contact's first letter of the name (purposed to be used to filter contacts by letters)
+ * @param firstName {String} Contact's first name
+ * @param lastName {String} Contact's last name
+ * @param rel {String} Contacts's relation to user
+ * @param numbers {NumberProps[]}
+ * @return {JSX.Element} JSX.Element
+ * @description  React Component. Component responsible.
+ * @return {JSX.Element} JSX.Element
+ */
+function Contact(
+  {
+    onClick,
+    id,
+    fl,
+    firstName,
+    lastName,
+    rel,
+    numbers,
+  }: ContactProps,
+): JSX.Element {
+  return (
+    &lt;div
+      onClick={onClick}
+      className={"flex flex-col hover:bg-blue-100 mb-1"}
+    >
+      &lt;div className="flex justify-between px-2 py-2  rounded cursor-pointer">
+        &lt;p className="flex text-gray-700 font-bold">
+          &lt;svg className="h2 w-2 text-gray-500 mx-2" viewBox="0 0 8 8" fill="currentColor">
+            &lt;circle cx="4" cy="4" r="3"/>
+          &lt;/svg>
+          {`${firstName} ${lastName}`}
+        &lt;/p>
+        &lt;p className="text-gray-500 font-thin">{rel}&lt;/p>
+      &lt;/div>
+      {
+        numbers &amp;&amp; numbers.length &amp;&amp; numbers.map((number, index) => {
+          return (
+            &lt;div key={`${index}`} className="flex justify-between px-2 py-2  rounded cursor-pointer">
+              &lt;p className="flex text-gray-600 capitalize text-sm">
+                &lt;svg className="h1 w-1 text-gray-500 mx-2" viewBox="0 0 8 8" fill="currentColor">
+                  &lt;circle cx="4" cy="4" r="3"/>
+                &lt;/svg>
+                {`${number.type} ${number.number}`}
+              &lt;/p>
+            &lt;/div>
+          );
+        })
+      }
+    &lt;/div>
+  );
+}
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default Contact;
+</code></pre>
+        </article>
+    </section>
 
 
 

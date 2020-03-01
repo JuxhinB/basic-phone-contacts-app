@@ -24,13 +24,18 @@ const USER_CONTEXT_INITIAL_VALUES = {
   setSearchStr: (str: String) => undefined,
 };
 
+/**
+ * @method createContext
+ * @memberOf MainProvider
+ * @description Hook used to initialize the context.
+ */
 export const MainContext = createContext<MainContextTypes>({
   ...USER_CONTEXT_INITIAL_VALUES,
 });
 
 /**
  * @class MainProvider
- * @param children JSX.Element
+ * @param children {JSX.Element} JSX.Element
  * @returns JSX.Element Application's main context.
  * @description This is the main global context about the application.
  * Responsible for holding and editing the contacts list.

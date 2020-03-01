@@ -2,10 +2,13 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { ContactsScreen, NewContactScreen, ContactDetailsScreen } from "../module/contacts";
 
-interface GuestNavigationProps {
-}
-
-function GuestNavigation() {
+/**
+ * @class GuestNavigation
+ * @description  React Component. This is one of the default navigation.
+ * Here rest all the screen with their belonging routes.
+ * @return {JSX.Element} JSX.Element
+ */
+function GuestNavigation(): JSX.Element {
   return (
     <Switch>
       <Route exact path="/" component={ContactsScreen}/>

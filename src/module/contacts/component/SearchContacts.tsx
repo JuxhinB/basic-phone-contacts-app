@@ -1,7 +1,13 @@
 import React, { useContext } from "react";
 import { MainContext } from "../../../provider";
 
-function SearchContacts() {
+/**
+ * @class SearchContacts
+ * @description  React Component. Screen listing all the details for the user.
+ * User details here are sent using react-router.
+ * @return {JSX.Element} JSX.Element
+ */
+function SearchContacts():JSX.Element {
 
   const { searchStr, setSearchStr } = useContext(MainContext);
 

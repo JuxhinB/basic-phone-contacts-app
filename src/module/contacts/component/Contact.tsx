@@ -1,6 +1,19 @@
 import React from "react";
 import { ContactProps } from "../../../Types";
 
+/**
+ * @class Contact
+ * @param onClick {Event} Event delegated by parent to understand wether the element is clidked or not.
+ * @param id {Number} Contact's id
+ * @param fl {String} Contact's first letter of the name (purposed to be used to filter contacts by letters)
+ * @param firstName {String} Contact's first name
+ * @param lastName {String} Contact's last name
+ * @param rel {String} Contacts's relation to user
+ * @param numbers {NumberProps[]}
+ * @return {JSX.Element} JSX.Element
+ * @description  React Component. Component responsible.
+ * @return {JSX.Element} JSX.Element
+ */
 function Contact(
   {
     onClick,
@@ -11,7 +24,7 @@ function Contact(
     rel,
     numbers,
   }: ContactProps,
-) {
+): JSX.Element {
   return (
     <div
       onClick={onClick}

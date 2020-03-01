@@ -1,9 +1,11 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: navigation/GuestNavigation.tsx</title>
 
     <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -51,8 +53,8 @@
             <div class="column is-9-desktop">
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
-                        <p>Title</p>
-                        <h1>Home</h1>
+                        <p>Source</p>
+                        <h1>navigation/GuestNavigation.tsx</h1>
                     </header>
                     
                     
@@ -60,25 +62,33 @@
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import { Route, Switch } from "react-router-dom";
+import { ContactsScreen, NewContactScreen, ContactDetailsScreen } from "../module/contacts";
 
+/**
+ * @class GuestNavigation
+ * @description  React Component. This is one of the default navigation.
+ * Here rest all the screen with their belonging routes.
+ * @return {JSX.Element} JSX.Element
+ */
+function GuestNavigation(): JSX.Element {
+  return (
+    &lt;Switch>
+      &lt;Route exact path="/" component={ContactsScreen}/>
+      &lt;Route exact path="/home" component={ContactsScreen}/>
+      &lt;Route exact path="/new-contact" component={NewContactScreen}/>
+      &lt;Route exact path="/details" component={ContactDetailsScreen}/>
+    &lt;/Switch>
+  );
+}
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default GuestNavigation;
+</code></pre>
+        </article>
+    </section>
 
 
 

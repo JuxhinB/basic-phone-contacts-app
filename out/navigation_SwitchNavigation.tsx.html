@@ -1,9 +1,11 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: navigation/SwitchNavigation.tsx</title>
 
     <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -51,8 +53,8 @@
             <div class="column is-9-desktop">
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
-                        <p>Title</p>
-                        <h1>Home</h1>
+                        <p>Source</p>
+                        <h1>navigation/SwitchNavigation.tsx</h1>
                     </header>
                     
                     
@@ -60,25 +62,31 @@
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import { GuestNavigation } from ".";
+import { BrowserRouter } from "react-router-dom";
 
+/**
+ * @class SwitchNavigation
+ * @description  React Component. This is the navigations's switcher.
+ * Can be used in case there is the scenario where a router can replace another
+ * for different purposes.
+ * @return {JSX.Element} JSX.Element
+ */
+function SwitchNavigation(): JSX.Element {
+  return (
+    &lt;BrowserRouter>
+      &lt;GuestNavigation/>
+    &lt;/BrowserRouter>
+  );
+}
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default SwitchNavigation;
+</code></pre>
+        </article>
+    </section>
 
 
 

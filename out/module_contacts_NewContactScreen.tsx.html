@@ -1,0 +1,222 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>JSDoc: module/contacts/NewContactScreen.tsx</title>
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./build/entry.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Muli:100,400,700|Oswald:300|Inconsolata,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+</head>
+
+<body>
+    <div id="stickyNavbarOverlay"></div>
+    <div class="top-navbar">
+        <div class="container">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    
+                    
+                        <h1 class="navbar-item">Documentation</h1>
+                    
+                    <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3" id="sidebarNav">
+                <div class="sidebar">
+                    <nav>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="Contact.html">Contact</a></li><li><a href="ContactDetailsScreen.html">ContactDetailsScreen</a></li><li><a href="ContactsAPI.html">ContactsAPI</a></li><li><a href="ContactsScreen.html">ContactsScreen</a></li><li><a href="GuestNavigation.html">GuestNavigation</a></li><li><a href="MainProvider.html">MainProvider</a></li><li><a href="NewContactScreen.html">NewContactScreen</a></li><li><a href="RootContainer.html">RootContainer</a></li><li><a href="SearchContacts.html">SearchContacts</a></li><li><a href="SwitchNavigation.html">SwitchNavigation</a></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+            <div class="column is-9-desktop">
+                <div class="content" id="main-content-wrapper">
+                    <header class="page-title">
+                        <p>Source</p>
+                        <h1>module/contacts/NewContactScreen.tsx</h1>
+                    </header>
+                    
+                    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useContext, useState } from "react";
+import moment from "moment";
+import { MainContext } from "../../provider";
+import { useHistory } from "react-router-dom";
+
+/**
+ * @class NewContactScreen
+ * @description React Component. Screen holding the form and functions to enter
+ * fields about the new contact.
+ * @return {JSX.Element} JSX.Element
+ */
+function NewContactScreen():JSX.Element {
+  // context
+  /**
+   * @method useContext
+   * @memberOf NewContactScreen
+   * @description Hook used to get addContact method from MainContext.
+   */
+  const { addContact } = useContext(MainContext);
+  // state
+  const [firstName, setFirstName] = useState&lt;string | null>(null);
+  const [lastName, setLastName] = useState&lt;string | null>(null);
+  const [rel, setRel] = useState&lt;string | null>("family");
+  const [nrType, setNrType] = useState&lt;string | null>("mobile");
+  const [phoneNumber, setPhoneNumber] = useState&lt;string | null>(null);
+  let history = useHistory();
+
+  /**
+   * @method handleCreateContact
+   * @memberOf NewContactScreen
+   * @return null
+   * @description Method used to format values from inputs and than add the new
+   * contact using hook from context.
+   */
+  function handleCreateContact():void {
+    if (firstName &amp;&amp; lastName &amp;&amp; rel &amp;&amp; phoneNumber &amp;&amp; nrType) {
+      addContact({
+        id: moment().unix(),
+        fl: firstName.charAt(0),
+        firstName: firstName,
+        lastName: lastName,
+        rel: rel,
+        numbers: [{
+          type: nrType,
+          number: phoneNumber,
+        }],
+      });
+      history.goBack();
+    }
+  }
+
+  return (
+    &lt;div className={"flex flex-1 justify-center items-center bg-blue-200"}>
+      &lt;div
+        style={{
+          maxWidth: 500,
+        }}
+        className="rounded-lg overflow-hidden shadow-lg bg-white min-h-64 w-full"
+      >
+        &lt;p className="px-2 text-gray-600 mb-2 text-2xl font-thin px-4 pt-3">New Contact&lt;/p>
+        &lt;div className="py-5 px-3">
+
+          &lt;div className={"flex"}>
+            &lt;input
+              onChange={(e) => {
+                setFirstName(e.target.value);
+              }}
+              type="text"
+              className="px-3 py-2 bg-gray-200 flex-1 rounded relative mb-3 mr-1"
+              placeholder="First Name"
+            />
+            &lt;input
+              onChange={(e) => {
+                setLastName(e.target.value);
+              }}
+              type="text"
+              className="px-3 py-2 bg-gray-200 flex-1 rounded relative mb-3 ml-1"
+              placeholder="Last Name"
+            />
+          &lt;/div>
+          &lt;div className={"flex"}>
+            &lt;div className={"flex w-1/2 mb-3"}>
+              &lt;select
+                onChange={(e) => {
+                  setRel(e.target.value);
+                }}
+                className={"px-3 py-2 bg-gray-200 flex-1 rounded mr-1"}
+              >
+                &lt;option value={"family"}>Family&lt;/option>
+                &lt;option value={"work"}>Work&lt;/option>
+                &lt;option value={"gym"}>Gym&lt;/option>
+                &lt;option value={"gym"}>School&lt;/option>
+              &lt;/select>
+            &lt;/div>
+            &lt;div className={"flex w-1/2 mb-3 pl-1"}>
+              &lt;select
+                onChange={(e) => {
+                  setNrType(e.target.value);
+                }}
+                className={"px-3 py-2 bg-gray-200 flex-1 rounded mr-1"}
+              >
+                &lt;option value={"mobile"}>Mob&lt;/option>
+                &lt;option value={"home"}>Home&lt;/option>
+              &lt;/select>
+              &lt;input
+                onChange={(e) => {
+                  setPhoneNumber(e.target.value);
+                }}
+                type="number"
+                className="px-3 py-2 bg-gray-200 w-10/12 rounded"
+                placeholder="Phone Number"
+              />
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+        &lt;div className="flex justify-end bg-gray-100 flex px-2 py-3">
+          &lt;button
+            onClick={handleCreateContact}
+            className="bg-blue-500 py-2 px-4 rounded text-white"
+          >
+            Create
+          &lt;/button>
+        &lt;/div>
+      &lt;/div>
+    &lt;/div>
+  );
+}
+
+export default NewContactScreen;</code></pre>
+        </article>
+    </section>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Sun Mar 01 2020 22:06:13 GMT+0100 (Central European Standard Time)</p>
+        <p class="sidebar-created-by">
+            <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+            <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+        </p>
+    </div>
+</footer>
+
+
+<script src="scripts/app.min.js"></script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

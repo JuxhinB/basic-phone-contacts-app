@@ -1,9 +1,11 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: module/contacts/ContactsScreen.tsx</title>
 
     <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -51,8 +53,8 @@
             <div class="column is-9-desktop">
                 <div class="content" id="main-content-wrapper">
                     <header class="page-title">
-                        <p>Title</p>
-                        <h1>Home</h1>
+                        <p>Source</p>
+                        <h1>module/contacts/ContactsScreen.tsx</h1>
                     </header>
                     
                     
@@ -60,25 +62,72 @@
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
+import { Contact, SearchContacts } from "./component";
+import { ContactProps } from "../../Types";
+import { MainContext } from "../../provider";
 
+/**
+ * @class ContactsScreen
+ * @description  React Component. Screen listing all the contacts that are
+ * in the MainProvider.
+ * @return {JSX.Element} JSX.Element
+ */
+function ContactsScreen(): JSX.Element {
+  let history = useHistory();
 
-    <h3> </h3>
+  const { contacts } = useContext(MainContext);
 
+  return (
+    &lt;div className={"flex flex-1 justify-center items-center bg-blue-200"}>
+      &lt;div
+        style={{
+          maxWidth: 500,
+        }}
+        className="rounded-lg overflow-hidden shadow-lg bg-white min-h-64 w-full"
+      >
+        &lt;p className="px-2 text-gray-600 mb-2 text-2xl font-thin px-4 pt-3">Contacts&lt;/p>
+        &lt;SearchContacts/>
+        &lt;div className="py-5 px-3">
+          {
+            contacts &amp;&amp; contacts.map((contact: ContactProps, index: number) => {
+              return (
+                &lt;Contact
+                  key={contact.id}
+                  onClick={() => {
+                    history.push("/details", contacts[index]);
+                  }}
+                  id={contact.id}
+                  fl={contact.fl}
+                  firstName={contact.firstName}
+                  lastName={contact.lastName}
+                  rel={contact.rel}
+                  numbers={contact.numbers}
+                />
+              );
+            })
+          }
+        &lt;/div>
+        &lt;div className="flex justify-end bg-gray-100 flex px-2 py-3">
+          &lt;button
+            onClick={() => history.push("/new-contact")}
+            className="bg-blue-500 py-2 px-4 rounded text-white"
+          >
+            Add Contact
+          &lt;/button>
+        &lt;/div>
+      &lt;/div>
+    &lt;/div>
+  );
+}
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default ContactsScreen;
+</code></pre>
+        </article>
+    </section>
 
 
 

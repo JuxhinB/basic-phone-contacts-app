@@ -4,6 +4,12 @@ import { Contact, SearchContacts } from "./component";
 import { ContactProps } from "../../Types";
 import { MainContext } from "../../provider";
 
+/**
+ * @class ContactsScreen
+ * @description  React Component. Screen listing all the contacts that are
+ * in the MainProvider.
+ * @return {JSX.Element} JSX.Element
+ */
 function ContactsScreen(): JSX.Element {
   let history = useHistory();
 

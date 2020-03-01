@@ -3,8 +3,19 @@ import moment from "moment";
 import { MainContext } from "../../provider";
 import { useHistory } from "react-router-dom";
 
-function NewContactScreen() {
+/**
+ * @class NewContactScreen
+ * @description React Component. Screen holding the form and functions to enter
+ * fields about the new contact.
+ * @return {JSX.Element} JSX.Element
+ */
+function NewContactScreen():JSX.Element {
   // context
+  /**
+   * @method useContext
+   * @memberOf NewContactScreen
+   * @description Hook used to get addContact method from MainContext.
+   */
   const { addContact } = useContext(MainContext);
   // state
   const [firstName, setFirstName] = useState<string | null>(null);
@@ -14,7 +25,14 @@ function NewContactScreen() {
   const [phoneNumber, setPhoneNumber] = useState<string | null>(null);
   let history = useHistory();
 
-  function handleCreateContact() {
+  /**
+   * @method handleCreateContact
+   * @memberOf NewContactScreen
+   * @return null
+   * @description Method used to format values from inputs and than add the new
+   * contact using hook from context.
+   */
+  function handleCreateContact():void {
     if (firstName && lastName && rel && phoneNumber && nrType) {
       addContact({
         id: moment().unix(),

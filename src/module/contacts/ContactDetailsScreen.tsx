@@ -3,33 +3,74 @@ import { useHistory } from "react-router-dom";
 import { ContactProps } from "../../Types";
 import { MainContext } from "../../provider";
 
+/**
+ * @class ContactDetailsScreen
+ * @description  React Component. Screen listing all the details for the user.
+ * User details here are sent using react-router.
+ * @return {JSX.Element} JSX.Element
+ */
 function ContactDetailsScreen() {
+  //context
+  /**
+   * @method useContext
+   * @memberOf ContactDetailsScreen
+   * @description Hook used to get removeContact and editContact method from MainContext.
+   */
   const { removeContact, editContact } = useContext(MainContext);
   // state
   const [info, setInfo] = useState<ContactProps | null>(null);
 
   let history = useHistory();
 
+  /**
+   * @method useEffect
+   * @memberOf ContactDetailsScreen
+   * @description Hook used to immediately read info from react-router and set it
+   * to component's state.
+   */
   useEffect(() => {
     setInfo(history.location.state as ContactProps);
     // eslint-disable-next-line
   }, []);
 
-  function handleContactDelete() {
+  /**
+   * @method handleContactDelete
+   * @memberOf ContactDetailsScreen
+   * @return null
+   * @description Method used to handle user's delete actions for a contact.
+   */
+  function handleContactDelete():void {
     if (info) {
       removeContact(info.id);
       history.goBack();
     }
   }
 
-  function handleContactEdit() {
+  /**
+   * @method handleContactEdit
+   * @memberOf ContactDetailsScreen
+   * @return null
+   * @description Method used to handle user's edit actions for a contact.
+   */
+  function handleContactEdit():void {
     if (info) {
       editContact(info.id, { ...info });
       history.goBack();
     }
   }
 
-  function handleNumberChange(action: "type" | "number", value: string, index: number) {
+  /**
+   *
+   * @method handleNumberChange
+   * @memberOf ContactDetailsScreen
+   * @param action {String} Flag to understand which part of the number is edited.
+   * Could be its type or the number itself.
+   * @param value {String} New value to be replace the current one.
+   * @param index {Number} Number position.
+   * @return null
+   * @description Method used to handle user's number change actions for a contact.
+   */
+  function handleNumberChange(action: "type" | "number", value: string, index: number):void {
     if (info) {
       let tempNum = JSON.parse(JSON.stringify(info.numbers));
       if (action === "type") {
